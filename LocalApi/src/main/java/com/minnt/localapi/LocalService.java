@@ -17,6 +17,11 @@ import okhttp3.ResponseBody;
 
 public class LocalService {
 
+    public static final String filekey = "filePath" ;
+
+    public static final String filePath = filekey + ":" ;
+
+
     private static boolean isDeveloperModeActive = false ;
 
     public static void setDeveloperMode(boolean developerModeActive) {
@@ -47,10 +52,10 @@ public class LocalService {
 
                         Response response = chain.proceed(request);
 
-                        if (isLocalApiRequired && isDeveloperModeActive ) {
+                        if (isLocalApiRequired && isDeveloperModeActive && BuildConfig.DEBUG ) {
 
                             MediaType contentType = Objects.requireNonNull(response.body()).contentType();
-                            String jsonString =  getResponseData( context , chain.request().headers().get("localFixtureFile")  ) ;
+                            String jsonString =  getResponseData( context , chain.request().headers().get(filekey)  ) ;
                             ResponseBody body = ResponseBody.create( jsonString , contentType);
                             callLiveApi();
                             return response.newBuilder().body(body).build();
@@ -71,7 +76,7 @@ public class LocalService {
 
         String json = null;
         try {
-            InputStream is = context.getAssets().open("fixture/" + fileName );
+            InputStream is = context.getAssets().open( fileName );
 
             int size = is.available();
 
