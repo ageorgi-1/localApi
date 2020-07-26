@@ -52,7 +52,7 @@ public class LocalService {
 
                         Response response = chain.proceed(request);
 
-                        if (isLocalApiRequired && isDeveloperModeActive && BuildConfig.DEBUG ) {
+                        if (isLocalApiRequired && isDeveloperModeActive  ) {
 
                             MediaType contentType = Objects.requireNonNull(response.body()).contentType();
                             String jsonString =  getResponseData( context , chain.request().headers().get(filekey)  ) ;

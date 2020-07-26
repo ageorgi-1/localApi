@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     void getPostsFromManager() {
-
-
-
        callLocalApi();
 
         MainService.getAllPosts(new Callback<List<Post>>() {
@@ -51,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     setTxt(response.body().get(0).getTitle());
                 }
-
             }
 
             @Override

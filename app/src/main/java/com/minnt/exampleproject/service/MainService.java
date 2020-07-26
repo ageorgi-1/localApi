@@ -16,8 +16,6 @@ public class MainService  {
 
     public static void getAllPosts(Callback<List<Post>> getPostsResponseCallback ) {
 
-
-
         Call< List<Post> > getPosts = mainInterface.getPosts() ;
 
         getPosts.enqueue( getPostsResponseCallback );
